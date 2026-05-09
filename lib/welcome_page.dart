@@ -7,11 +7,9 @@ class WelcomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(//CONTAINER DO GRADIENTE DE FUNDO
-        
+      body: Container(
         width: double.infinity,
         height: double.infinity,
-
         decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.centerLeft,
@@ -19,186 +17,213 @@ class WelcomePage extends StatelessWidget {
             colors: [
               Color(0xFF5de0e6),
               Color(0xFF004aad),
-            ]
-          ),
-        ),
-        
-        child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 20,
-            vertical: 40,
-            ),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-
-              Image.asset((
-                "asset/images/logo_TechSenior.png"),
-                width: 200,
-                height: 200,
-                ),
-                SizedBox(height: 20),
-                Text(
-                  "Olá! Bem vindo ao Tech Senior. Vamos aprender a usar o celular juntos!",                  
-                  textAlign: TextAlign.center,
-                  style:                 
-                   GoogleFonts.poppins(
-                    height: 1.5,
-                    fontSize: 24,
-                    fontWeight: FontWeight.bold,
-                    shadows: [
-                      Shadow(
-                        offset: Offset(2, 2),
-                        blurRadius: 4,
-                        color: Color.fromARGB(255, 5, 36, 76),
-                      )
-                    ],
-                    color: Color(0xFF74ff13),
-                  ),
-                ),
-          
-                 Expanded(
-                  child: Row(
-                    spacing: 20,
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                    
-                                Container(//CONTAINER DO GRADIENTE DO BOTÃO ENTRAR
-                                  width: 150,
-                                  height: 55,
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [
-                                        Color(0xFF5de65e),
-                                        Color(0xFF00d9a3),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3), 
-                                      ),
-                                    ],
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () {},
-                                    child: Text("Entrar",
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFFfffae6),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                  
-                                Container(//CONTAINER DO GRADIENTE DO BOTÃO CRIE SUA CONTA
-                                  width: 150,
-                                  height: 55,
-                                  decoration: BoxDecoration(
-                                    gradient: const LinearGradient(
-                                      begin: Alignment.centerLeft,
-                                      end: Alignment.centerRight,
-                                      colors: [
-                                        Color(0xFF5de65e),
-                                        Color(0xFF00d9a3),
-                                      ],
-                                    ),
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black.withOpacity(0.2),
-                                        spreadRadius: 1,
-                                        blurRadius: 5,
-                                        offset: const Offset(0, 3), 
-                                      ),
-                                    ],
-                                  ),
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      backgroundColor: Colors.transparent,
-                                      shadowColor: Colors.transparent,
-                                    ),
-                                    onPressed: () {},
-                                    child: Text(
-                                      "Crie sua Conta",
-                                      textAlign: TextAlign.center,
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 18,
-                                        fontWeight: FontWeight.bold,
-                                        color: Color(0xFFfffae6),
-                                      ),
-                                    ),
-                                    
-                                  ),
-                                ),
-                              ],
-                            ),
-          ),
-         
-                  Container(//CONTAINER DO GRADIENTE DO BOTÃO ACESSE SEM CONTA
-                    width: 250, // Define uma largura boa para o botão
-                    height: 50,  // E uma altura padrão
-                    decoration: BoxDecoration(
-                      // Aqui você define o gradiente (use as mesmas cores do fundo se quiser!)
-                      gradient: const LinearGradient(
-                        begin: Alignment.centerLeft,
-                        end: Alignment.centerRight,
-                        colors: [
-                          Color(0xFF5de65e),
-                          Color(0xFF00d9a3),
-                        ],
-                      ),
-                      borderRadius: BorderRadius.circular(10), // Bordas bem arredondadas
-                      // Opcional: Adicionar uma sombra leve
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
-                          spreadRadius: 1,
-                          blurRadius: 5,
-                          offset: const Offset(0, 3), 
-                        ),
-                      ],
-                    ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        // Sua ação aqui
-                      },
-                style: ElevatedButton.styleFrom(
-                  // 2. IMPORTANTE: Deixa o fundo do botão transparente
-                  backgroundColor: Colors.transparent, 
-                  shadowColor: Colors.transparent, // Remove a sombra padrão
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(25), // Mesma borda do Container
-                  ),
-                ),
-
-                
-
-                child: Text(
-                  "Acesse sem Conta",
-                  style: GoogleFonts.poppins(
-                    color: Color(0xFFfffae6), // Cor do texto
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-            ),
-            Spacer(flex: 1),
             ],
           ),
         ),
-      
+        // AJUSTE 1: Use LayoutBuilder para pegar as constraints da tela
+        child: LayoutBuilder(
+          builder: (context, constraints) {
+            return SingleChildScrollView(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(
+                  // AJUSTE 2: Isso impede que o conteúdo suma
+                  minHeight: constraints.maxHeight,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 40,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset(
+                        "asset/images/logo_TechSenior.png",
+                        width: 200,
+                        height: 200,
+                      ),
+                      const SizedBox(height: 20),
+                      Text(
+                        "Olá! Bem vindo ao Tech Senior. Vamos aprender a usar o celular juntos!",
+                        textAlign: TextAlign.center,
+                        style: GoogleFonts.changaOne(
+                          height: 1.5,
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                          shadows: const [
+                            Shadow(
+                              offset: Offset(2, 2),
+                              blurRadius: 4,
+                              color: Color.fromARGB(255, 0, 0, 0),
+                            )
+                          ],
+                          color: const Color.fromARGB(255, 0, 238, 123),
+                        ),
+                      ),
+                      const SizedBox(height: 25),
+                      Wrap(
+                        alignment: WrapAlignment.center,
+                        spacing: 20,
+                        runSpacing: 20,
+                        children: [
+                          // BOTÃO ENTRAR
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 0,
+                                  offset: const Offset(6, 6),
+                                ),
+                              ],
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color.fromARGB(255, 0, 238, 123),
+                                fixedSize: const Size(155, 60),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Text(
+                                    "Entrar",
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = const Color.fromARGB(189, 1, 35, 79),
+                                    ),
+                                  ),
+                                  Text(
+                                    "Entrar",
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                          // BOTÃO CRIE UMA CONTA
+                          Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.5),
+                                  spreadRadius: 1,
+                                  blurRadius: 0,
+                                  offset: const Offset(6, 6),
+                                ),
+                              ],
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color.fromARGB(255, 0, 238, 123),
+                                fixedSize: const Size(155, 60),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              child: Stack(
+                                children: [
+                                  Text(
+                                    "Crie uma Conta",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = const Color.fromARGB(189, 1, 35, 79),
+                                    ),
+                                  ),
+                                  Text(
+                                    "Crie uma Conta",
+                                    textAlign: TextAlign.center,
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                      // BOTÃO ACESSE SEM CONTA
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.5),
+                              spreadRadius: 1,
+                              blurRadius: 0,
+                              offset: const Offset(6, 6),
+                            ),
+                          ],
+                        ),
+                        child: ElevatedButton(
+                          onPressed: () {},
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color.fromARGB(255, 0, 238, 123),
+                            fixedSize: const Size(270, 50),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          
+                          child: Stack(
+                                children: [
+                                  // CAMADA 1: O contorno (fica por baixo)
+                                  Text(
+                                    "Acesse sem Conta",
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4 // Grossura do contorno
+                                        ..color = const Color.fromARGB(246, 1, 35, 79), // Azul escuro
+                                    ),
+                                  ),
+                                  // CAMADA 2: O preenchimento (fica por cima)
+                                  Text(
+                                    "Acesse sem Conta",
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                        ),
+                      ),
+                      // AJUSTE 3: Removi o Spacer() e usei um SizedBox para dar respiro no fim
+                      const SizedBox(height: 70),
+                    ],
+                  ),
+                ),
+              ),
+            );
+          },
+        ),
       ),
     );
   }
