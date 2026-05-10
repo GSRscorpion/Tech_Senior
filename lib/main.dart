@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'welcome_page.dart';
+import 'package:tech_senior/cadastro_page.dart';
+//import 'package:tech_senior/login_page.dart';
+//import 'package:tech_senior/sem_conta.dart';
+//import 'welcome_page.dart';
 void main(){
 runApp(AppTechSenior());
 }
@@ -11,7 +14,12 @@ class AppTechSenior extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tech Senior',
-      home: WelcomePage(),
+      home: CadastroPage(),
+      theme: ThemeData(
+        primaryColor: const Color(0xFF00EE7B),
+        splashColor: Colors.transparent, // Remove o efeito de clique em tudo
+        highlightColor: Colors.transparent,
+      ),
     );
   }
 }
