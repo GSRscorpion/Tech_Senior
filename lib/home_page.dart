@@ -117,8 +117,8 @@ class _HomePageState extends State<HomePage> {
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
                                   Image.asset(
-                                    'asset/images/whats.png',
-                                    height: 43,
+                                    'asset/images/whatsapp.png',
+                                    height: 35,
                                   ),
                                   const SizedBox(width: 20),
                                   Stack(

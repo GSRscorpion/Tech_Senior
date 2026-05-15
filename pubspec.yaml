@@ -66,7 +66,7 @@ flutter:
     - asset/images/credito.png
     - asset/images/facebook.png
     - asset/images/google.png
-    - asset/images/whats.png
+    - asset/images/whatsapp.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
