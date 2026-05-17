@@ -185,6 +185,13 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.orange,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Text(
@@ -193,6 +200,13 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.orange,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -303,6 +317,13 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.orange,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Text(
@@ -311,6 +332,13 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.orange,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -421,6 +449,13 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.orange,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     Text(
@@ -429,6 +464,13 @@ class _HomePageState extends State<HomePage> {
                                         color: Colors.orange,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17,
+                                        shadows: [
+                                          Shadow(
+                                            offset: Offset(2, 2),
+                                            blurRadius: 4,
+                                            color: Color.fromARGB(255, 0, 0, 0),
+                                          ),
+                                        ],
                                       ),
                                     ),
                                   ],
