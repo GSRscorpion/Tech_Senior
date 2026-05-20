@@ -9,7 +9,6 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
-  int abaSelecionanada = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tech_senior/bottomnav_page.dart';
-import 'package:tech_senior/home_page.dart';
 
 class SemConta extends StatefulWidget {
   const SemConta({super.key});
