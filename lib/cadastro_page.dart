@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:tech_senior/bottomnav_page.dart';
+import 'package:tech_senior/home_page.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({super.key});
@@ -11,10 +13,38 @@ class CadastroPage extends StatefulWidget {
 
 class _CadastroPageState extends State<CadastroPage> {
   bool _mostrarSenha = true;
+  final _formKey = GlobalKey<FormState>();
+  final _nomeController = TextEditingController();
+  final _dataController = TextEditingController();
+  final _telefoneController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _senhaController = TextEditingController();
+
+  final maskData = MaskTextInputFormatter(
+  mask: '##/##/####', 
+  filter: { "#": RegExp(r'[0-9]') },
+  type: MaskAutoCompletionType.lazy,
+);
+
+final maskTelefone = MaskTextInputFormatter(
+  mask: '(##) #########', // Aceita o DDD + 9 dígitos
+  filter: { "#": RegExp(r'[0-9]') },
+  type: MaskAutoCompletionType.lazy,
+);
   @override
+  void dispose() {
+    _nomeController.dispose();
+    _dataController.dispose();
+    _telefoneController.dispose();
+    _emailController.dispose();
+    _senhaController.dispose();
+    super.dispose();
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 24, 255, 143)),
         title: Image.asset(
           'asset/images/logo_TechSenior.png',
           width: 100,
@@ -54,688 +84,842 @@ class _CadastroPageState extends State<CadastroPage> {
                   // AJUSTE 2: Isso impede que o conteúdo suma
                   minHeight: constraints.maxHeight,
                 ),
-                child: Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 40,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Stack(
-                        children: [
-                          Text(
-                            "Crie sua conta \ncom",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 4
-                                ..color = const Color.fromARGB(189, 1, 35, 79),
-                            ),
-                          ),
-                          Text(
-                            "Crie sua conta \ncom",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 40),
-
-                      Wrap(
-                        alignment: WrapAlignment.center,
-                        spacing: 8,
-                        runSpacing: 20,
-                        children: [
-                          // BOTÃO FACEBOOK
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromARGB(
-                                    133,
-                                    0,
-                                    0,
-                                    0,
-                                  ).withValues(alpha: 0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 0,
-                                  offset: const Offset(6, 6),
-                                ),
-                              ],
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  0,
-                                  238,
-                                  123,
-                                ),
-                                fixedSize: const Size(147, 55),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                              child: Row(
-                                // Mudamos para Row para alinhar horizontalmente
-                                mainAxisAlignment: MainAxisAlignment
-                                    .center, // Centraliza tudo no botão
-                                children: [
-                                  Image.asset(
-                                    alignment: AlignmentGeometry.directional(
-                                      6,
-                                      9,
-                                    ),
-                                    'asset/images/facebook.png',
-                                    height: 24,
+                child: Form(
+                  key: _formKey,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 40,
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Stack(
+                          children: [
+                            Text(
+                              "Crie sua conta \ncom",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 4
+                                  ..color = const Color.fromARGB(
+                                    189,
+                                    1,
+                                    35,
+                                    79,
                                   ),
-                                  const SizedBox(
-                                    width: 3,
-                                  ), // AQUI você controla o espaço entre a logo e o texto
-                                  // O seu Stack de texto entra aqui como um "filho" da Row
-                                  Stack(
-                                    children: [
-                                      Text(
-                                        "Facebook",
-                                        style: GoogleFonts.changaOne(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          foreground: Paint()
-                                            ..style = PaintingStyle.stroke
-                                            ..strokeWidth = 4
-                                            ..color = const Color.fromARGB(
-                                              189,
-                                              1,
-                                              35,
-                                              79,
-                                            ),
-                                        ),
-                                      ),
-                                      Text(
-                                        "Facebook",
-                                        style: GoogleFonts.changaOne(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
                               ),
                             ),
-                          ),
-                          const SizedBox(height: 20),
-
-                          // BOTÃO GOOGLE
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              boxShadow: [
-                                BoxShadow(
-                                  color: const Color.fromARGB(
-                                    133,
-                                    0,
-                                    0,
-                                    0,
-                                  ).withValues(alpha: 0.5),
-                                  spreadRadius: 1,
-                                  blurRadius: 0,
-                                  offset: const Offset(6, 6),
-                                ),
-                              ],
-                            ),
-                            child: ElevatedButton(
-                              onPressed: () {},
-                              style: ElevatedButton.styleFrom(
-                                backgroundColor: const Color.fromARGB(
-                                  255,
-                                  0,
-                                  238,
-                                  123,
-                                ),
-                                fixedSize: const Size(147, 55),
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                            Text(
+                              "Crie sua conta \ncom",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
                               ),
-
-                              child: Row(
-                                // Mudamos para Row para alinhar horizontalmente
-                                mainAxisAlignment: MainAxisAlignment
-                                    .center, // Centraliza tudo no botão
-                                children: [
-                                  Image.asset(
-                                    'asset/images/google.png',
-                                    height: 24,
-                                  ),
-                                  const SizedBox(
-                                    width: 4,
-                                  ), // AQUI você controla o espaço entre a logo e o texto
-                                  // O seu Stack de texto entra aqui como um "filho" da Row
-                                  Stack(
-                                    children: [
-                                      Text(
-                                        "Google",
-                                        style: GoogleFonts.changaOne(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          foreground: Paint()
-                                            ..style = PaintingStyle.stroke
-                                            ..strokeWidth = 4
-                                            ..color = const Color.fromARGB(
-                                              189,
-                                              1,
-                                              35,
-                                              79,
-                                            ),
-                                        ),
-                                      ),
-                                      Text(
-                                        "Google",
-                                        style: GoogleFonts.changaOne(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 60),
-                      Divider(
-                        color: Color.fromARGB(
-                          255,
-                          87,
-                          135,
-                          239,
-                        ), // O verde que você está usando
-                        thickness: 2, // Grossura da linha
-                        indent: 10, // Espaço vazio na esquerda
-                        endIndent: 10, // Espaço vazio na direita
-                      ),
-
-                      const SizedBox(height: 60),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Stack(
-                              children: [
-                                Text(
-                                  "\nInsira seu nome",
-
-                                  style: GoogleFonts.changaOne(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    foreground: Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..strokeWidth = 4
-                                      ..color = const Color.fromARGB(
-                                        189,
-                                        1,
-                                        35,
-                                        79,
-                                      ),
-                                  ),
-                                ),
-                                Text(
-                                  "\nInsira seu nome",
-
-                                  style: GoogleFonts.changaOne(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                          Expanded(
-                            child: Stack(
-                              children: [
-                                Text(
-                                  "                                   Insira sua data de nascimento",
-                                  textAlign: TextAlign.right,
-                                  style: GoogleFonts.changaOne(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    foreground: Paint()
-                                      ..style = PaintingStyle.stroke
-                                      ..strokeWidth = 4
-                                      ..color = const Color.fromARGB(
-                                        189,
-                                        1,
-                                        35,
-                                        79,
-                                      ),
-                                  ),
-                                ),
-                                Text(
-                                  "                                   Insira sua data de nascimento",
-                                  textAlign: TextAlign.right,
-                                  style: GoogleFonts.changaOne(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Row(
-                        spacing: 5,
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: TextField(
-                              cursorColor: const Color(0xFF00EE7B),
-                              style: GoogleFonts.robotoSlab(
-                                color: Color.fromARGB(255, 63, 144, 251),
-                                fontSize: 17,
-                              ),
-                              decoration: InputDecoration(
-                                labelText: "Nome",
-                                labelStyle: GoogleFonts.robotoSlab(
-                                  color: Color(0xFF00EE7B),
-                                  fontSize: 17,
-                                ),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.8),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      0,
-                                      238,
-                                      123,
-                                    ),
-                                    width: 2,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 63, 144, 251),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-
-                          Expanded(
-                            flex: 2,
-                            child: TextField(
-                              cursorColor: const Color(0xFF00EE7B),
-                              style: GoogleFonts.robotoSlab(
-                                color: Color.fromARGB(255, 63, 144, 251),
-                                fontSize: 17,
-                              ),
-                              decoration: InputDecoration(
-                                labelText: "dd/mm/aaaa",
-                                labelStyle: GoogleFonts.robotoSlab(
-                                  color: Color(0xFF00EE7B),
-                                  fontSize: 15,
-                                ),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.8),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      0,
-                                      238,
-                                      123,
-                                    ),
-                                    width: 2,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 63, 144, 251),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 20),
-
-                      Stack(
-                        children: [
-                          Text(
-                            "Insira o número do seu telefone",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 4
-                                ..color = const Color.fromARGB(189, 1, 35, 79),
-                            ),
-                          ),
-                          Text(
-                            "Insira o número do seu telefone",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Row(
-                        spacing: 5,
-                        children: [
-                          Expanded(
-                            child: TextField(
-                              cursorColor: const Color(0xFF00EE7B),
-                              style: GoogleFonts.robotoSlab(
-                                color: Color.fromARGB(255, 63, 144, 251),
-                                fontSize: 17,
-                              ),
-                              decoration: InputDecoration(
-                                labelText: "(55) 99999-9999",
-                                labelStyle: GoogleFonts.robotoSlab(
-                                  color: Color(0xFF00EE7B),
-                                  fontSize: 17,
-                                ),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.8),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      0,
-                                      238,
-                                      123,
-                                    ),
-                                    width: 2,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 63, 144, 251),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 20),
-
-                      Stack(
-                        children: [
-                          Text(
-                            "Insira seu Endereço de email",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 4
-                                ..color = const Color.fromARGB(189, 1, 35, 79),
-                            ),
-                          ),
-                          Text(
-                            "Insira seu Endereço de email",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Row(
-                        spacing: 5,
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: TextField(
-                              cursorColor: const Color(0xFF00EE7B),
-                              style: GoogleFonts.robotoSlab(
-                                color: Color.fromARGB(255, 63, 144, 251),
-                                fontSize: 17,
-                              ),
-                              decoration: InputDecoration(
-                                labelText: "seuNome@Exemplo.com",
-                                labelStyle: GoogleFonts.robotoSlab(
-                                  color: Color(0xFF00EE7B),
-                                  fontSize: 17,
-                                ),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.8),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      0,
-                                      238,
-                                      123,
-                                    ),
-                                    width: 2,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 63, 144, 251),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      const SizedBox(height: 30),
-
-                      Stack(
-                        children: [
-                          Text(
-                            "Crie sua senha",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              foreground: Paint()
-                                ..style = PaintingStyle.stroke
-                                ..strokeWidth = 4
-                                ..color = const Color.fromARGB(189, 1, 35, 79),
-                            ),
-                          ),
-                          Text(
-                            "Crie sua senha",
-                            textAlign: TextAlign.center,
-                            style: GoogleFonts.changaOne(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-
-                      Row(
-                        spacing: 5,
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              obscureText: _mostrarSenha,
-                              obscuringCharacter: '*',
-                              cursorColor: const Color(0xFF00EE7B),
-                              style: GoogleFonts.robotoSlab(
-                                color: Color.fromARGB(255, 63, 144, 251),
-                                fontSize: 17,
-                              ),
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  splashColor: Colors.transparent,
-                                  highlightColor: Colors.transparent,
-                                  icon: Icon(
-                                    // Alterna o desenho do ícone baseado na variável
-                                    _mostrarSenha
-                                        ? Icons.visibility_off
-                                        : Icons.visibility,
-                                    color: const Color(0xFF00EE7B),
-                                  ),
-                                  onPressed: () {
-                                    // O setState avisa o Flutter para redesenhar a tela
-                                    setState(() {
-                                      _mostrarSenha = !_mostrarSenha;
-                                    });
-                                  },
-                                ),
-                                labelText: "Insira sua senha",
-                                labelStyle: GoogleFonts.robotoSlab(
-                                  color: Color(0xFF00EE7B),
-                                  fontSize: 17,
-                                ),
-                                floatingLabelBehavior:
-                                    FloatingLabelBehavior.never,
-                                filled: true,
-                                fillColor: Colors.white.withValues(alpha: 0.8),
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                  borderSide: BorderSide(
-                                    color: const Color.fromARGB(
-                                      255,
-                                      0,
-                                      238,
-                                      123,
-                                    ),
-                                    width: 2,
-                                  ),
-                                ),
-                                focusedBorder: OutlineInputBorder(
-                                  borderSide: const BorderSide(
-                                    color: Color.fromARGB(255, 63, 144, 251),
-                                    width: 2,
-                                  ),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                      Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                          boxShadow: [
-                            BoxShadow(
-                              color: const Color.fromARGB(
-                                133,
-                                0,
-                                0,
-                                0,
-                              ).withValues(alpha: 0.5),
-                              spreadRadius: 1,
-                              blurRadius: 0,
-                              offset: const Offset(6, 6),
                             ),
                           ],
                         ),
-                        child: ElevatedButton(
-                          onPressed: () {},
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color.fromARGB(
-                              255,
-                              0,
-                              238,
-                              123,
-                            ),
-                            fixedSize: const Size(270, 50),
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
 
-                          child: Stack(
-                            children: [
-                              // CAMADA 1: O contorno (fica por baixo)
-                              Text(
-                                "Começar a aprender",
-                                style: GoogleFonts.changaOne(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.bold,
-                                  foreground: Paint()
-                                    ..style = PaintingStyle.stroke
-                                    ..strokeWidth =
-                                        4 // Grossura do contorno
-                                    ..color = const Color.fromARGB(
-                                      246,
-                                      1,
-                                      35,
-                                      79,
-                                    ), // Azul escuro
+                        const SizedBox(height: 40),
+
+                        Wrap(
+                          alignment: WrapAlignment.center,
+                          spacing: 8,
+                          runSpacing: 20,
+                          children: [
+                            // BOTÃO FACEBOOK
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color.fromARGB(
+                                      133,
+                                      0,
+                                      0,
+                                      0,
+                                    ).withValues(alpha: 0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 0,
+                                    offset: const Offset(6, 6),
+                                  ),
+                                ],
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color.fromARGB(
+                                    255,
+                                    0,
+                                    238,
+                                    123,
+                                  ),
+                                  fixedSize: const Size(147, 55),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                child: Row(
+                                  // Mudamos para Row para alinhar horizontalmente
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Centraliza tudo no botão
+                                  children: [
+                                    Image.asset(
+                                      alignment: AlignmentGeometry.directional(
+                                        6,
+                                        9,
+                                      ),
+                                      'asset/images/facebook.png',
+                                      height: 24,
+                                    ),
+                                    const SizedBox(
+                                      width: 3,
+                                    ), // AQUI você controla o espaço entre a logo e o texto
+                                    // O seu Stack de texto entra aqui como um "filho" da Row
+                                    Stack(
+                                      children: [
+                                        Text(
+                                          "Facebook",
+                                          style: GoogleFonts.changaOne(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            foreground: Paint()
+                                              ..style = PaintingStyle.stroke
+                                              ..strokeWidth = 4
+                                              ..color = const Color.fromARGB(
+                                                189,
+                                                1,
+                                                35,
+                                                79,
+                                              ),
+                                          ),
+                                        ),
+                                        Text(
+                                          "Facebook",
+                                          style: GoogleFonts.changaOne(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                              // CAMADA 2: O preenchimento (fica por cima)
-                              Text(
-                                "Começar a aprender",
-                                style: GoogleFonts.changaOne(
-                                  fontSize: 23,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                            ),
+                            const SizedBox(height: 20),
+
+                            // BOTÃO GOOGLE
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: const Color.fromARGB(
+                                      133,
+                                      0,
+                                      0,
+                                      0,
+                                    ).withValues(alpha: 0.5),
+                                    spreadRadius: 1,
+                                    blurRadius: 0,
+                                    offset: const Offset(6, 6),
+                                  ),
+                                ],
+                              ),
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: const Color.fromARGB(
+                                    255,
+                                    0,
+                                    238,
+                                    123,
+                                  ),
+                                  fixedSize: const Size(147, 55),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
                                 ),
+
+                                child: Row(
+                                  // Mudamos para Row para alinhar horizontalmente
+                                  mainAxisAlignment: MainAxisAlignment
+                                      .center, // Centraliza tudo no botão
+                                  children: [
+                                    Image.asset(
+                                      'asset/images/google.png',
+                                      height: 24,
+                                    ),
+                                    const SizedBox(
+                                      width: 4,
+                                    ), // AQUI você controla o espaço entre a logo e o texto
+                                    // O seu Stack de texto entra aqui como um "filho" da Row
+                                    Stack(
+                                      children: [
+                                        Text(
+                                          "Google",
+                                          style: GoogleFonts.changaOne(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            foreground: Paint()
+                                              ..style = PaintingStyle.stroke
+                                              ..strokeWidth = 4
+                                              ..color = const Color.fromARGB(
+                                                189,
+                                                1,
+                                                35,
+                                                79,
+                                              ),
+                                          ),
+                                        ),
+                                        Text(
+                                          "Google",
+                                          style: GoogleFonts.changaOne(
+                                            fontSize: 18,
+                                            fontWeight: FontWeight.bold,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 60),
+                        Divider(
+                          color: Color.fromARGB(
+                            255,
+                            87,
+                            135,
+                            239,
+                          ), // O verde que você está usando
+                          thickness: 2, // Grossura da linha
+                          indent: 10, // Espaço vazio na esquerda
+                          endIndent: 10, // Espaço vazio na direita
+                        ),
+
+                        const SizedBox(height: 60),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Stack(
+                                children: [
+                                  Text(
+                                    "\nInsira seu nome",
+
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = const Color.fromARGB(
+                                          189,
+                                          1,
+                                          35,
+                                          79,
+                                        ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "\nInsira seu nome",
+
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: Stack(
+                                children: [
+                                  Text(
+                                    "                                   Insira sua data de nascimento",
+                                    textAlign: TextAlign.right,
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      foreground: Paint()
+                                        ..style = PaintingStyle.stroke
+                                        ..strokeWidth = 4
+                                        ..color = const Color.fromARGB(
+                                          189,
+                                          1,
+                                          35,
+                                          79,
+                                        ),
+                                    ),
+                                  ),
+                                  Text(
+                                    "                                   Insira sua data de nascimento",
+                                    textAlign: TextAlign.right,
+                                    style: GoogleFonts.changaOne(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          spacing: 5,
+                          children: [
+                            Expanded(
+                              flex: 3,
+                              child: TextFormField(
+                                controller: _nomeController,
+                                cursorColor: const Color(0xFF00EE7B),
+                                style: GoogleFonts.robotoSlab(
+                                  color: Color.fromARGB(255, 63, 144, 251),
+                                  fontSize: 17,
+                                ),
+                                decoration: InputDecoration(
+                                  labelText: "Nome",
+                                  labelStyle: GoogleFonts.robotoSlab(
+                                    color: Color(0xFF00EE7B),
+                                    fontSize: 17,
+                                  ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  filled: true,
+                                  fillColor: Colors.white.withValues(
+                                    alpha: 0.8,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        0,
+                                        238,
+                                        123,
+                                      ),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 63, 144, 251),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Por favor, digite seu Nome!';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+
+                            Expanded(
+                              flex: 2,
+                              child: TextFormField(
+                                controller: _dataController,
+                                keyboardType: TextInputType.number, // Abre o teclado numérico
+                                inputFormatters: [maskData], // Aplica a máscara dd/mm/aaaa
+                                cursorColor: const Color(0xFF00EE7B),
+                                style: GoogleFonts.robotoSlab(
+                                  color: Color.fromARGB(255, 63, 144, 251),
+                                  fontSize: 17,
+                                ),
+                                decoration: InputDecoration(
+                                  labelText: "dd/mm/aaaa",
+                                  labelStyle: GoogleFonts.robotoSlab(
+                                    color: Color(0xFF00EE7B),
+                                    fontSize: 15,
+                                  ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  filled: true,
+                                  fillColor: Colors.white.withValues(
+                                    alpha: 0.8,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        0,
+                                        238,
+                                        123,
+                                      ),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 63, 144, 251),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Por favor, digite sua data de nacimento!';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        Stack(
+                          children: [
+                            Text(
+                              "Insira o número do seu telefone",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 4
+                                  ..color = const Color.fromARGB(
+                                    189,
+                                    1,
+                                    35,
+                                    79,
+                                  ),
+                              ),
+                            ),
+                            Text(
+                              "Insira o número do seu telefone",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          spacing: 5,
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _telefoneController,
+                                keyboardType: TextInputType.phone, // Abre o teclado de telefone
+                                inputFormatters: [maskTelefone],
+                                cursorColor: const Color(0xFF00EE7B),
+                                style: GoogleFonts.robotoSlab(
+                                  color: Color.fromARGB(255, 63, 144, 251),
+                                  fontSize: 17,
+                                ),
+                                decoration: InputDecoration(
+                                  labelText: "(55) 99999-9999",
+                                  labelStyle: GoogleFonts.robotoSlab(
+                                    color: Color(0xFF00EE7B),
+                                    fontSize: 17,
+                                  ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  filled: true,
+                                  fillColor: Colors.white.withValues(
+                                    alpha: 0.8,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        0,
+                                        238,
+                                        123,
+                                      ),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 63, 144, 251),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Por favor, digite seu Numero de telefone!';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 20),
+
+                        Stack(
+                          children: [
+                            Text(
+                              "Insira seu Endereço de email",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 4
+                                  ..color = const Color.fromARGB(
+                                    189,
+                                    1,
+                                    35,
+                                    79,
+                                  ),
+                              ),
+                            ),
+                            Text(
+                              "Insira seu Endereço de email",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          spacing: 5,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: TextFormField(
+                                controller: _emailController,
+                                cursorColor: const Color(0xFF00EE7B),
+                                style: GoogleFonts.robotoSlab(
+                                  color: Color.fromARGB(255, 63, 144, 251),
+                                  fontSize: 17,
+                                ),
+                                decoration: InputDecoration(
+                                  labelText: "seuNome@Exemplo.com",
+                                  labelStyle: GoogleFonts.robotoSlab(
+                                    color: Color(0xFF00EE7B),
+                                    fontSize: 17,
+                                  ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  filled: true,
+                                  fillColor: Colors.white.withValues(
+                                    alpha: 0.8,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        0,
+                                        238,
+                                        123,
+                                      ),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 63, 144, 251),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Por favor, digite seu Email!';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        const SizedBox(height: 30),
+
+                        Stack(
+                          children: [
+                            Text(
+                              "Crie sua senha",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                foreground: Paint()
+                                  ..style = PaintingStyle.stroke
+                                  ..strokeWidth = 4
+                                  ..color = const Color.fromARGB(
+                                    189,
+                                    1,
+                                    35,
+                                    79,
+                                  ),
+                              ),
+                            ),
+                            Text(
+                              "Crie sua senha",
+                              textAlign: TextAlign.center,
+                              style: GoogleFonts.changaOne(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: Colors.white,
+                              ),
+                            ),
+                          ],
+                        ),
+
+                        Row(
+                          spacing: 5,
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _senhaController,
+                                obscureText: _mostrarSenha,
+                                obscuringCharacter: '*',
+                                cursorColor: const Color(0xFF00EE7B),
+                                style: GoogleFonts.robotoSlab(
+                                  color: Color.fromARGB(255, 63, 144, 251),
+                                  fontSize: 17,
+                                ),
+                                decoration: InputDecoration(
+                                  suffixIcon: IconButton(
+                                    splashColor: Colors.transparent,
+                                    highlightColor: Colors.transparent,
+                                    icon: Icon(
+                                      // Alterna o desenho do ícone baseado na variável
+                                      _mostrarSenha
+                                          ? Icons.visibility_off
+                                          : Icons.visibility,
+                                      color: const Color(0xFF00EE7B),
+                                    ),
+                                    onPressed: () {
+                                      // O setState avisa o Flutter para redesenhar a tela
+                                      setState(() {
+                                        _mostrarSenha = !_mostrarSenha;
+                                      });
+                                    },
+                                  ),
+                                  labelText: "Insira sua senha",
+                                  labelStyle: GoogleFonts.robotoSlab(
+                                    color: Color(0xFF00EE7B),
+                                    fontSize: 17,
+                                  ),
+                                  floatingLabelBehavior:
+                                      FloatingLabelBehavior.never,
+                                  filled: true,
+                                  fillColor: Colors.white.withValues(
+                                    alpha: 0.8,
+                                  ),
+                                  enabledBorder: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    borderSide: BorderSide(
+                                      color: const Color.fromARGB(
+                                        255,
+                                        0,
+                                        238,
+                                        123,
+                                      ),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  errorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedErrorBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Colors.red,
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  focusedBorder: OutlineInputBorder(
+                                    borderSide: const BorderSide(
+                                      color: Color.fromARGB(255, 63, 144, 251),
+                                      width: 2,
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                ),
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return 'Por favor, digite uma Senha!';
+                                  }
+                                  return null;
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 40),
+                        Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            boxShadow: [
+                              BoxShadow(
+                                color: const Color.fromARGB(
+                                  133,
+                                  0,
+                                  0,
+                                  0,
+                                ).withValues(alpha: 0.5),
+                                spreadRadius: 1,
+                                blurRadius: 0,
+                                offset: const Offset(6, 6),
                               ),
                             ],
                           ),
-                        ),
-                      ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              // Valida o Form inteiro de uma só vez
+                              if (_formKey.currentState!.validate()) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const BottomnavPage(),
+                                  ),
+                                );
+                              } else {
+                                print("Campos obrigatórios vazios.");
+                              }
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: const Color.fromARGB(
+                                255,
+                                0,
+                                238,
+                                123,
+                              ),
+                              fixedSize: const Size(270, 50),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
 
-                      const SizedBox(height: 70),
-                    ], //children
+                            child: Stack(
+                              children: [
+                                // CAMADA 1: O contorno (fica por baixo)
+                                Text(
+                                  "Começar a aprender",
+                                  style: GoogleFonts.changaOne(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.bold,
+                                    foreground: Paint()
+                                      ..style = PaintingStyle.stroke
+                                      ..strokeWidth =
+                                          4 // Grossura do contorno
+                                      ..color = const Color.fromARGB(
+                                        246,
+                                        1,
+                                        35,
+                                        79,
+                                      ), // Azul escuro
+                                  ),
+                                ),
+                                // CAMADA 2: O preenchimento (fica por cima)
+                                Text(
+                                  "Começar a aprender",
+                                  style: GoogleFonts.changaOne(
+                                    fontSize: 23,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+
+                        const SizedBox(height: 70),
+                      ], //children
+                    ),
                   ),
                 ),
               ),

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:tech_senior/home_page.dart';
-import 'package:tech_senior/user_page.dart';
+//import 'package:tech_senior/bottomnav_page.dart';
+//import 'package:tech_senior/config_page.dart';
+//import 'package:tech_senior/home_page.dart';
+//import 'package:tech_senior/user_page.dart';
 //import 'package:tech_senior/cadastro_page.dart';
 //import 'package:tech_senior/login_page.dart';
 //import 'package:tech_senior/sem_conta.dart';
-//import 'welcome_page.dart';
+import 'welcome_page.dart';
 void main(){
 runApp(AppTechSenior());
 }
@@ -16,7 +18,7 @@ class AppTechSenior extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Tech Senior',
-      home: UserPage(),
+      home: WelcomePage(),
       theme: ThemeData(
         primaryColor: const Color(0xFF00EE7B),
         splashColor: Colors.transparent, // Remove o efeito de clique em tudo

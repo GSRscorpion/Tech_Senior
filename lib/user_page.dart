@@ -14,6 +14,7 @@ class _UserPageState extends State<UserPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 24, 255, 143),),
         title: Row(
           children: [
             Image.asset(
@@ -89,7 +90,7 @@ class _UserPageState extends State<UserPage> {
                           gradient: const LinearGradient(
                             colors: [
                               Color(0xFF00EE7B),
-                              Color.fromARGB(176, 94, 217, 222),
+                              Color.fromARGB(235, 94, 218, 222),
                             ],
                             begin: Alignment.centerLeft,
                             end: Alignment.centerRight,
@@ -411,95 +412,6 @@ class _UserPageState extends State<UserPage> {
               ),
             );
           },
-        ),
-      ),
-      bottomNavigationBar: Container(
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.centerLeft,
-            end: Alignment.centerRight,
-            colors: [Color(0xFF5de0e6), Color(0xFF004aad)], //colors
-          ),
-        ),
-        child: BottomNavigationBar(
-          iconSize: 30,
-          selectedLabelStyle: GoogleFonts.robotoSlab(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            shadows: [
-              Shadow(
-                offset: Offset(2, 2),
-                blurRadius: 4,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-            ],
-          ),
-          unselectedLabelStyle: GoogleFonts.robotoSlab(
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-            shadows: [
-              Shadow(
-                offset: Offset(2, 2),
-                blurRadius: 4,
-                color: Color.fromARGB(255, 0, 0, 0),
-              ),
-            ],
-          ),
-          backgroundColor: Colors.transparent,
-          selectedItemColor: Color(0xFF00EE7B),
-          unselectedItemColor: Colors.white,
-          type: BottomNavigationBarType.fixed,
-          elevation: 0,
-          currentIndex: abaSelecionanada,
-          onTap: (indice) {
-            setState(() {
-              abaSelecionanada = indice;
-            });
-          },
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.person_2_sharp,
-                size: 35,
-                shadows: [
-                  Shadow(
-                    offset: Offset(2, 2),
-                    blurRadius: 4,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ],
-              ),
-              label: "Perfil",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                size: 35,
-                shadows: [
-                  Shadow(
-                    offset: Offset(2, 2),
-                    blurRadius: 4,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ],
-              ),
-              label: "Inicio",
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.settings,
-                size: 35,
-                shadows: [
-                  Shadow(
-                    offset: Offset(2, 2),
-                    blurRadius: 4,
-                    color: Color.fromARGB(255, 0, 0, 0),
-                  ),
-                ],
-              ),
-              label: "Ajustes",
-            ),
-          ],
         ),
       ),
     );
