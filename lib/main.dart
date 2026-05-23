@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+//import 'package:tech_senior/exerciciozap_page.dart';
 //import 'package:tech_senior/bottomnav_page.dart';
 //import 'package:tech_senior/config_page.dart';
 //import 'package:tech_senior/home_page.dart';

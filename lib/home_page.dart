@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import 'package:tech_senior/exerciciozap_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -10,12 +10,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme: IconThemeData(color: Color.fromARGB(255, 24, 255, 143),),
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 24, 255, 143)),
         title: Row(
           children: [
             Image.asset(
@@ -53,8 +52,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
       ),
-      body: 
-      Container(
+      body: Container(
         width: double.infinity,
         height: double.infinity,
         decoration: const BoxDecoration(
@@ -98,7 +96,12 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => ExerciciozapPage()),
+                            );
+                          },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: const Color.fromARGB(
                               255,
