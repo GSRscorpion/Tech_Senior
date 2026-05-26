@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tech_senior/widgets/ajustes_controller.dart';
 
 class UserPage extends StatefulWidget {
   const UserPage({super.key});
@@ -9,10 +10,12 @@ class UserPage extends StatefulWidget {
 }
 
 class _UserPageState extends State<UserPage> {
+  final multiplicador = AjustesController().multiplicadorFonte;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         iconTheme: IconThemeData(color: Color.fromARGB(255, 24, 255, 143),),
         title: Row(
           children: [
@@ -142,7 +145,7 @@ class _UserPageState extends State<UserPage> {
                                 Text(
                                   "Usuário",
                                   style: GoogleFonts.changaOne(
-                                    fontSize: 24,
+                                    fontSize: 24 * multiplicador,
                                     fontWeight: FontWeight.bold,
                                     foreground: Paint()
                                       ..style = PaintingStyle.stroke
@@ -153,7 +156,7 @@ class _UserPageState extends State<UserPage> {
                                 Text(
                                   "Usuário",
                                   style: GoogleFonts.changaOne(
-                                    fontSize: 24,
+                                    fontSize: 24 * multiplicador,
                                     fontWeight: FontWeight.bold,
                                     color: Colors.white,
                                   ),
@@ -183,8 +186,8 @@ class _UserPageState extends State<UserPage> {
                               ),
                               child: Column(
                                 children: [
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                  Wrap(
+                                    alignment: WrapAlignment.center,
                                     children: [
                                       const Icon(
                                         Icons.emoji_events,
@@ -197,7 +200,7 @@ class _UserPageState extends State<UserPage> {
                                           Text(
                                             "Meu progresso",
                                             style: GoogleFonts.changaOne(
-                                              fontSize: 24,
+                                              fontSize: 24 * multiplicador,
                                               fontWeight: FontWeight.bold,
                                               foreground: Paint()
                                                 ..style = PaintingStyle.stroke
@@ -210,7 +213,7 @@ class _UserPageState extends State<UserPage> {
                                           Text(
                                             "Meu progresso",
                                             style: GoogleFonts.changaOne(
-                                              fontSize: 24,
+                                              fontSize: 24 * multiplicador,
                                               fontWeight: FontWeight.bold,
                                               color: Colors.white,
                                             ),
@@ -230,7 +233,7 @@ class _UserPageState extends State<UserPage> {
                                     style: GoogleFonts.robotoSlab(
                                       color: Colors.orange,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 17,
+                                      fontSize: 17 * multiplicador,
                                       shadows: [
                                         Shadow(
                                           offset: Offset(2, 2),
@@ -305,7 +308,7 @@ class _UserPageState extends State<UserPage> {
                                       Text(
                                         "Conta",
                                         style: GoogleFonts.changaOne(
-                                          fontSize: 24,
+                                          fontSize: 24 * multiplicador,
                                           fontWeight: FontWeight.bold,
                                           foreground: Paint()
                                             ..style = PaintingStyle.stroke
@@ -316,7 +319,7 @@ class _UserPageState extends State<UserPage> {
                                       Text(
                                         "Conta",
                                         style: GoogleFonts.changaOne(
-                                          fontSize: 24,
+                                          fontSize: 24 * multiplicador,
                                           fontWeight: FontWeight.bold,
                                           color: Colors.white,
                                         ),
@@ -340,7 +343,7 @@ class _UserPageState extends State<UserPage> {
                                         Text(
                                           "Alterar nome",
                                           style: GoogleFonts.changaOne(
-                                            fontSize: 21,
+                                            fontSize: 21 * multiplicador,
                                             fontWeight: FontWeight.bold,
                                             foreground: Paint()
                                               ..style = PaintingStyle.stroke
@@ -351,7 +354,7 @@ class _UserPageState extends State<UserPage> {
                                         Text(
                                           "Alterar nome",
                                           style: GoogleFonts.changaOne(
-                                            fontSize: 21,
+                                            fontSize: 21 * multiplicador,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
                                           ),
@@ -377,7 +380,7 @@ class _UserPageState extends State<UserPage> {
                                         Text(
                                           "Apagar meus dados \ne sair",
                                           style: GoogleFonts.changaOne(
-                                            fontSize: 20,
+                                            fontSize: 20 * multiplicador,
                                             fontWeight: FontWeight.bold,
                                             foreground: Paint()
                                               ..style = PaintingStyle.stroke
@@ -389,7 +392,7 @@ class _UserPageState extends State<UserPage> {
                                         Text(
                                           "Apagar meus dados \ne sair",
                                           style: GoogleFonts.changaOne(
-                                            fontSize: 20,
+                                            fontSize: 20 * multiplicador,
                                             fontWeight: FontWeight.bold,
                                             color: Colors.white,
                                           ),
