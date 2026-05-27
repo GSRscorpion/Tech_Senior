@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.8
   google_fonts: ^8.1.0
   mask_text_input_formatter: ^2.9.0
+  audioplayers: ^6.6.0
  
 
 dev_dependencies:
@@ -69,6 +70,8 @@ flutter:
     - asset/images/google.png
     - asset/images/whatsapp.png
     - asset/images/crown.png
+    - asset/sounds/click.mp3
+    - asset/sounds/sucesso.mp3
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

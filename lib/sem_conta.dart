@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tech_senior/bottomnav_page.dart';
+import 'package:tech_senior/widgets/ajustes_controller.dart';
 
 class SemConta extends StatefulWidget {
   const SemConta({super.key});
@@ -11,6 +12,10 @@ class SemConta extends StatefulWidget {
 
 final _formKey = GlobalKey<FormState>();
 final _nomeController = TextEditingController();
+void _tocarSomClique() {
+      AjustesController().tocarSomClique();
+    }
+
 
 class _SemContaState extends State<SemConta> {
   @override
@@ -192,7 +197,7 @@ class _SemContaState extends State<SemConta> {
                                 ),
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {
-                                    return 'Por favor, digite seu e-mail!';
+                                    return 'Por favor, digite seu nome!';
                                   }
                                   return null;
                                 },
@@ -222,6 +227,7 @@ class _SemContaState extends State<SemConta> {
                           ),
                           child: ElevatedButton(
                             onPressed: () {
+                              _tocarSomClique();
                               // Valida o Form inteiro de uma só vez
                               if (_formKey.currentState!.validate()) {
                                 Navigator.push(

@@ -15,6 +15,9 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     // Pegamos o multiplicador para ajustar dinamicamente o preenchimento se necessário
     final multiplicador = AjustesController().multiplicadorFonte;
+    void _tocarSomClique() {
+      AjustesController().tocarSomClique();
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -101,6 +104,7 @@ class _HomePageState extends State<HomePage> {
                         lessonsTotal: "14",
                         multiplicador: multiplicador,
                         onPressed: () {
+                          _tocarSomClique();
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -121,7 +125,7 @@ class _HomePageState extends State<HomePage> {
                         lessonsDone: "8",
                         lessonsTotal: "12",
                         multiplicador: multiplicador,
-                        onPressed: () {},
+                        onPressed: () {_tocarSomClique();},
                       ),
 
                       const SizedBox(height: 35),
@@ -135,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                         lessonsDone: "5",
                         lessonsTotal: "9",
                         multiplicador: multiplicador,
-                        onPressed: () {},
+                        onPressed: () {_tocarSomClique();},
                       ),
 
                       const SizedBox(height: 30),

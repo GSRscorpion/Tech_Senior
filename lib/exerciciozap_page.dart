@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; // 1. IMPORTADO PARA USAR OS SONS DO SISTEMA
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tech_senior/widgets/ajustes_controller.dart';
 import 'package:tech_senior/widgets/indicador.dart';
@@ -25,9 +24,14 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
     'https://images.pexels.com/photos/1450360/pexels-photo-1450360.jpeg?auto=compress&cs=tinysrgb&w=400',
   ];
 
-  // FUNÇÃO AUXILIAR PARA REPRODUZIR O SOM DE CLIQUE
+  // 1. FUNÇÃO CORRIGIDA PARA USAR O SEU AJUSTESCONTROLLER
   void _tocarSomClique() {
-    SystemSound.play(SystemSoundType.click);
+    AjustesController().tocarSomClique();
+  }
+
+  // 2. FUNÇÃO ADICIONADA PARA O SOM DE SUCESSO
+  void _tocarSomSucesso() {
+    AjustesController().tocarSomSucesso();
   }
 
   @override
@@ -77,7 +81,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
       ),
       body: Column(
         children: [
-          // 1. BANNER DE INSTRUÇÃO
+          // BANNER DE INSTRUÇÃO
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
@@ -135,7 +139,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
             ),
           ),
 
-          // 2. CONTEÚDO DINÂMICO RESPONSIVO
+          // CONTEÚDO DINÂMICO RESPONSIVO
           Expanded(
             child: OrientationBuilder(
               builder: (context, orientation) {
@@ -221,7 +225,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
             ),
           ),
 
-          // 3. BARRA DE DIGITAÇÃO SIMULADA
+          // BARRA DE DIGITAÇÃO SIMULADA
           if (passoAtual < 3) _construirBarraDigitacao(),
         ],
       ),
@@ -256,7 +260,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
         texto,
         textAlign: TextAlign.center,
         style: TextStyle(
-          fontSize: 16 * multiplicador, // AQUI: Multiplicador aplicado no balão
+          fontSize: 16 * multiplicador,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -294,7 +298,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      _tocarSomClique(); // AQUI: Som adicionado ao clicar no clipe
+                      _tocarSomClique();
                       if (passoAtual == 1) {
                         setState(() {
                           passoAtual = 2;
@@ -383,7 +387,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
 
             return GestureDetector(
               onTap: () {
-                _tocarSomClique(); // AQUI: Som adicionado ao clicar em qualquer item do menu anexo
+                _tocarSomClique();
                 if (ehGaleria && passoAtual == 2) {
                   setState(() {
                     passoAtual = 3;
@@ -448,7 +452,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
 
                     return GestureDetector(
                       onTap: () {
-                        _tocarSomClique(); // AQUI: Som adicionado ao escolher uma foto
+                        _tocarSomClique();
                         setState(() {
                           imagemSelecionada = index;
                         });
@@ -515,7 +519,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
                     ativo: passoAtual == 3 && temFotoSelecionada,
                     child: GestureDetector(
                       onTap: () {
-                        _tocarSomClique(); // AQUI: Som adicionado ao clicar no botão de enviar (seta verde)
+                        _tocarSomClique();
                         if (passoAtual == 3 && temFotoSelecionada) {
                           setState(() {
                             passoAtual = 4;
@@ -527,6 +531,8 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
                               setState(() {
                                 passoAtual = 5;
                               });
+                              // 3. TOCAR SOM DE SUCESSO AQUI QUANDO TERMINAR
+                              _tocarSomSucesso();
                             }
                           });
                         }
@@ -617,7 +623,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
                         label: const Text("Voltar para o Início",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         onPressed: () {
-                          _tocarSomClique(); // AQUI: Som adicionado no botão fechar/home
+                          _tocarSomClique();
                           Navigator.of(context).pop();
                         },
                       ),
@@ -634,7 +640,7 @@ class _ExerciciozapPageState extends State<ExerciciozapPage> {
                         label: const Text("Próximo Exercício",
                             style: TextStyle(fontWeight: FontWeight.bold)),
                         onPressed: () {
-                          _tocarSomClique(); // AQUI: Som adicionado no botão avançar
+                          _tocarSomClique();
                           debugPrint("Avançando para o próximo exercício...");
                         },
                       ),

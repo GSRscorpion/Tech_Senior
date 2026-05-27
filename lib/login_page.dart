@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tech_senior/bottomnav_page.dart';
+import 'package:tech_senior/widgets/ajustes_controller.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,6 +12,10 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   bool _mostrarSenha = true;
+  void _tocarSomClique() {
+      AjustesController().tocarSomClique();
+    }
+
   
   // Apenas UMA chave para controlar o formulário inteiro
   final _formKey = GlobalKey<FormState>(); 
@@ -126,7 +131,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {_tocarSomClique();},
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(255, 0, 238, 123),
                                   fixedSize: const Size(147, 55),
@@ -134,8 +139,8 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
                                   children: [
                                     Image.asset(
                                       'asset/images/facebook.png',
@@ -186,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
                                 ],
                               ),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {_tocarSomClique();},
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(255, 0, 238, 123),
                                   fixedSize: const Size(147, 55),
@@ -194,8 +199,8 @@ class _LoginPageState extends State<LoginPage> {
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
                                   children: [
                                     Image.asset(
                                       'asset/images/google.png',
@@ -423,7 +428,7 @@ class _LoginPageState extends State<LoginPage> {
                             ],
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () {_tocarSomClique();
                               // Valida o Form inteiro de uma só vez
                               if (_formKey.currentState!.validate()) {
                                 Navigator.push(

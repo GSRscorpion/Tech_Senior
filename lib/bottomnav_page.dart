@@ -3,6 +3,7 @@ import 'package:tech_senior/config_page.dart';
 import 'package:tech_senior/home_page.dart';
 import 'package:tech_senior/user_page.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:tech_senior/widgets/ajustes_controller.dart';
 
 class BottomnavPage extends StatefulWidget {
   const BottomnavPage({super.key});
@@ -13,6 +14,10 @@ class BottomnavPage extends StatefulWidget {
 
 class _BottomnavPageState extends State<BottomnavPage> {
   int abaSelecionada = 1;
+  void _tocarSomClique() {
+      AjustesController().tocarSomClique();
+    }
+
 
   final List<Widget> _paginas = [
     const UserPage(),
@@ -61,7 +66,7 @@ class _BottomnavPageState extends State<BottomnavPage> {
           type: BottomNavigationBarType.fixed,
           elevation: 0,
           currentIndex: abaSelecionada,
-          onTap: (indice) {
+          onTap: (indice) {_tocarSomClique();
             setState(() {
               abaSelecionada = indice;
             });

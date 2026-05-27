@@ -1,30 +1,43 @@
 import 'package:flutter/material.dart';
-// Certifique-se de adicionar o pacote 'audioplayers' no seu pubspec.yaml se for tocar áudios reais
-// Para este exemplo, usaremos uma simulação com print ou recursos nativos.
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
+// Importação especial para rodar JavaScript nativo na Web sem quebrar o app
+import 'dart:html' as html;
 
 class AjustesController extends ChangeNotifier {
-  // Instância única (Singleton) para acessar de qualquer tela
   static final AjustesController _instance = AjustesController._internal();
+  
   factory AjustesController() => _instance;
+  
   AjustesController._internal();
 
-  // 1. Estado do Tamanho do Texto (0 = Pequeno, 1 = Médio, 2 = Grande)
+  // Player do pacote (será usado se um dia rodar em celular físico)
+  final AudioPlayer _audioPlayer = AudioPlayer();
+
+  // Elementos de áudio HTML5 nativos para a Web não dar erro de codec/formato
+  html.AudioElement? _audioCliqueWeb;
+  html.AudioElement? _audioSucessoWeb;
+
+  // ==========================================
+  // ESTADO DO TAMANHO DO TEXTO
+  // ==========================================
   double _tamanhoTextoSlider = 1.0;
   double get tamanhoTextoSlider => _tamanhoTextoSlider;
 
-  // Multiplicador que você vai usar nos seus Text widgets: TextStyle(fontSize: 16 * AjustesController().multiplicadorFonte)
-  double get multiplicadorFonte {
-    if (_tamanhoTextoSlider == 0.0) return 0.8; // Pequeno
-    if (_tamanhoTextoSlider == 2.0) return 1.3; // Grande
-    return 1.0; // Médio
-  }
-
   set tamanhoTextoSlider(double valor) {
     _tamanhoTextoSlider = valor;
-    notifyListeners(); // Atualiza as telas
+    notifyListeners();
   }
 
-  // 2. Estado dos Sons do Aplicativo
+  double get multiplicadorFonte {
+    if (_tamanhoTextoSlider == 0.0) return 0.8;
+    if (_tamanhoTextoSlider == 2.0) return 1.3;
+    return 1.0;
+  }
+
+  // ==========================================
+  // ESTADO DOS SONS DO APLICATIVO
+  // ==========================================
   bool _sonsAtivos = true;
   bool get sonsAtivos => _sonsAtivos;
 
@@ -33,18 +46,43 @@ class AjustesController extends ChangeNotifier {
     notifyListeners();
   }
 
-  // 3. Funções de Som (Item 2 e 3 da sua lista)
-  void tocarSomClique() {
-    if (_sonsAtivos) {
-      debugPrint("🔊 Som tocado: Clique no botão!");
-      // Aqui você coloca o código do seu pacote de áudio, ex: audioPlayer.play(AssetSource('sons/clique.mp3'));
+  // ==========================================
+  // MÉTODOS DE ÁUDIO CORRIGIDOS COM FALLBACK WEB
+  // ==========================================
+
+  Future<void> tocarSomClique() async {
+    if (!_sonsAtivos) return;
+
+    try {
+      if (kIsWeb) {
+        // Na Web, criamos um elemento de áudio HTML5 puro que o Chrome aceita sem chiar
+        _audioCliqueWeb ??= html.AudioElement('assets/asset/sounds/click.mp3');
+        _audioCliqueWeb!.currentTime = 0; // Reseta para o início caso clique rápido
+        _audioCliqueWeb!.play();
+      } else {
+        // Código para celular/emulador normal
+        await _audioPlayer.stop(); 
+        await _audioPlayer.play(AssetSource('sounds/click.mp3'));
+      }
+    } catch (e) {
+      print("Erro ao tocar som de clique: $e");
     }
   }
 
-  void tocarSomSucesso() {
-    if (_sonsAtivos) {
-      debugPrint("🎉 Som tocado: Exercício Concluído com Sucesso!");
-      // ex: audioPlayer.play(AssetSource('sons/sucesso.mp3'));
+  Future<void> tocarSomSucesso() async {
+    if (!_sonsAtivos) return;
+
+    try {
+      if (kIsWeb) {
+        _audioSucessoWeb ??= html.AudioElement('assets/asset/sounds/sucesso.mp3');
+        _audioSucessoWeb!.currentTime = 0;
+        _audioSucessoWeb!.play();
+      } else {
+        await _audioPlayer.stop();
+        await _audioPlayer.play(AssetSource('sounds/sucesso.mp3'));
+      }
+    } catch (e) {
+      print("Erro ao tocar som de sucesso: $e");
     }
   }
 }

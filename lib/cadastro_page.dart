@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tech_senior/bottomnav_page.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:tech_senior/widgets/ajustes_controller.dart';
 
 class CadastroPage extends StatefulWidget {
   const CadastroPage({super.key});
@@ -39,6 +40,11 @@ final maskTelefone = MaskTextInputFormatter(
     _senhaController.dispose();
     super.dispose();
   }
+
+  void _tocarSomClique() {
+      AjustesController().tocarSomClique();
+    }
+
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -150,7 +156,7 @@ final maskTelefone = MaskTextInputFormatter(
                                 ],
                               ),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {_tocarSomClique();},
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(
                                     255,
@@ -163,10 +169,8 @@ final maskTelefone = MaskTextInputFormatter(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                 ),
-                                child: Row(
-                                  // Mudamos para Row para alinhar horizontalmente
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .center, // Centraliza tudo no botão
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
                                   children: [
                                     Image.asset(
                                       alignment: AlignmentGeometry.directional(
@@ -233,7 +237,7 @@ final maskTelefone = MaskTextInputFormatter(
                                 ],
                               ),
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {_tocarSomClique();},
                                 style: ElevatedButton.styleFrom(
                                   backgroundColor: const Color.fromARGB(
                                     255,
@@ -247,10 +251,8 @@ final maskTelefone = MaskTextInputFormatter(
                                   ),
                                 ),
 
-                                child: Row(
-                                  // Mudamos para Row para alinhar horizontalmente
-                                  mainAxisAlignment: MainAxisAlignment
-                                      .center, // Centraliza tudo no botão
+                                child: Wrap(
+                                  alignment: WrapAlignment.center,
                                   children: [
                                     Image.asset(
                                       'asset/images/google.png',
@@ -856,7 +858,7 @@ final maskTelefone = MaskTextInputFormatter(
                             ],
                           ),
                           child: ElevatedButton(
-                            onPressed: () {
+                            onPressed: () {_tocarSomClique();
                               // Valida o Form inteiro de uma só vez
                               if (_formKey.currentState!.validate()) {
                                 Navigator.push(

@@ -11,12 +11,16 @@ class UserPage extends StatefulWidget {
 
 class _UserPageState extends State<UserPage> {
   final multiplicador = AjustesController().multiplicadorFonte;
+  void _tocarSomClique() {
+    AjustesController().tocarSomClique();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        iconTheme: IconThemeData(color: Color.fromARGB(255, 24, 255, 143),),
+        iconTheme: IconThemeData(color: Color.fromARGB(255, 24, 255, 143)),
         title: Row(
           children: [
             Image.asset(
@@ -330,7 +334,7 @@ class _UserPageState extends State<UserPage> {
 
                                   // Botão Alterar Nome (Verde)
                                   ElevatedButton(
-                                    onPressed: () {},
+                                    onPressed: () {_tocarSomClique();},
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: Color(0xFF00EE7B),
                                       minimumSize: Size(200, 40),
@@ -366,8 +370,7 @@ class _UserPageState extends State<UserPage> {
 
                                   // Botão Apagar Dados (Vermelho)
                                   ElevatedButton(
-                                    
-                                    onPressed: () {},
+                                    onPressed: () {_tocarSomClique();},
                                     style: ElevatedButton.styleFrom(
                                       backgroundColor: const Color(0xFFD32F2F),
                                       minimumSize: const Size(200, 40),

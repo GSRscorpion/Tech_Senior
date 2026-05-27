@@ -3,12 +3,16 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:tech_senior/cadastro_page.dart';
 import 'package:tech_senior/login_page.dart';
 import 'package:tech_senior/sem_conta.dart';
+import 'package:tech_senior/widgets/ajustes_controller.dart';
 
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    void _tocarSomClique() {
+      AjustesController().tocarSomClique();
+    }
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -91,6 +95,7 @@ class WelcomePage extends StatelessWidget {
                             ),
                             child: ElevatedButton(
                               onPressed: () {
+                                _tocarSomClique();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -161,6 +166,7 @@ class WelcomePage extends StatelessWidget {
                             ),
                             child: ElevatedButton(
                               onPressed: () {
+                                _tocarSomClique();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
@@ -237,6 +243,7 @@ class WelcomePage extends StatelessWidget {
                         ),
                         child: ElevatedButton(
                           onPressed: () {
+                            _tocarSomClique();
                             Navigator.push(
                               context,
                               MaterialPageRoute(
